@@ -10,6 +10,10 @@ Calculating the period and stability for all the 200x200 orbits in the grid is c
 
 This is just a tool to visualise and shouldn't be used as an official way to calculate orbit stability or orbit periods.
 
+### Period Map and Stability Map
+<img src="https://github.com/0x365/orbit-view/blob/main/data/period_map.png" width="300" height="250"></img>
+<img src="https://github.com/0x365/orbit-view/blob/main/data/stability.png" width="300" height="250"></img>
+
 ### Setup
 ```bash
 python -m venv venv
