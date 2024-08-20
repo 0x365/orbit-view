@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
+# plt.rcParams['figure.dpi'] = 500
+
 
 from propagator import prop
 
@@ -87,7 +89,7 @@ def onclick(event):
 def main_map():
 
     fig, axs = plt.subplots(1,1, figsize=(12,10))
-    colors = plt.imshow(grid, extent=[-1,1,1,-1], cmap="BuPu_r")
+    colors = plt.imshow(grid, extent=[-1,1,1,-1], cmap="turbo")
     axs.invert_yaxis()
 
     ticker = np.arange(0, np.nanmax(grid), 0.01)
@@ -112,10 +114,12 @@ def main_map():
 if __name__ == '__main__':
     total_steps = num_loops*per_loop
 
-    grid = np.load("data/orbit_deviation_std.npy")
+    grid = np.array(np.load("data/orbit_deviation_std.npy"),dtype=float)
     grid[grid == np.inf] = np.nan
-    grid = 1-np.sqrt(1/grid)
+    # grid = 1-np.sqrt(1/grid)
+    grid = np.log10(1/grid)
+    grid[grid == np.inf] = np.nan
 
-    period = np.load("data/periods.npy")
+    period = np.array(np.load("data/periods.npy"),dtype=float)
 
     main_map()
