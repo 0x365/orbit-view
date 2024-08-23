@@ -11,12 +11,12 @@ Calculating the period and stability for all the 200x200 orbits in the grid is c
 This is just a tool to visualise and shouldn't be used as an official way to calculate orbit stability or orbit periods.
 
 ### Map of standard distribution of energy of each orbit
-<img src="https://github.com/0x365/orbit-view/blob/main/data/line/energies_std.png" width="300" height="250"></img>
-<img src="https://github.com/0x365/orbit-view/blob/main/data/triangle/energies_std.png" width="300" height="250"></img>
+<img src="https://github.com/0x365/orbit-view/blob/main/data/line/energies_std.png" width="300" height="300"></img>
+<img src="https://github.com/0x365/orbit-view/blob/main/data/triangle/energies_std.png" width="300" height="300"></img>
 
 ### Map of Correlation between FFT of Neighbouring Orbits
-<img src="https://github.com/0x365/orbit-view/blob/main/data/line/fft_map_close.png" width="300" height="250"></img>
-<img src="https://github.com/0x365/orbit-view/blob/main/data/triangle/fft_map_close.png" width="300" height="250"></img>
+<img src="https://github.com/0x365/orbit-view/blob/main/data/line/fft_map_close.png" width="300" height="300"></img>
+<img src="https://github.com/0x365/orbit-view/blob/main/data/triangle/fft_map_close.png" width="300" height="300"></img>
 
 ### Setup
 ```bash
