@@ -1,5 +1,8 @@
 import numpy as np
 from scipy.integrate import solve_ivp
+from numpy.linalg import norm
+
+SQRT3 = np.sqrt(3)
 
 
 def prop(initial, time=20, timestep=1000):
@@ -29,3 +32,41 @@ def prop(initial, time=20, timestep=1000):
                     method="DOP853", rtol=1e-10, atol=1e-13)
 
     return sol    
+
+
+
+def get_orbit(v_1,v_2, frequency, total_time, configuration="triangle"):
+
+    v_1 = float(v_1)
+    v_2 = float(v_2)
+
+    m1,m2,m3 = 1,1,1
+    if configuration == "line":
+        r1x, r1y, r2x, r2y, r3x, r3y = -1, 0, 1, 0, 0, 0
+        v1x, v1y, v2x, v2y, v3x, v3y = v_1, v_2, v_1, v_2, -2*v_1/m3, -2*v_2/m3
+    elif configuration == "triangle":
+        r1x, r1y, r2x, r2y, r3x, r3y = -SQRT3/2, -0.5, SQRT3/2, -0.5, 0, 1
+        v1x, v1y, v2x, v2y, v3x, v3y = v_1/2, v_2*(-SQRT3/2), v_1/2, v_2*(SQRT3/2), -v_1, 0
+    initial = [m1,m2,m3,r1x,r1y,r2x,r2y,r3x,r3y,v1x,v1y,v2x,v2y,v3x,v3y]
+    time = total_time*frequency
+    timestep = total_time
+
+    orbit = prop(initial, time=time, timestep=timestep)["y"]
+
+    r1x, r1y, r2x, r2y, r3x, r3y = orbit[0], orbit[1], orbit[2], orbit[3], orbit[4], orbit[5]
+    v1x, v1y, v2x, v2y, v3x, v3y = orbit[6], orbit[7], orbit[8], orbit[9], orbit[10], orbit[11]
+
+    r12 = norm([r1x-r2x, r1y-r2y], axis=0)**2
+    r13 = norm([r1x-r3x, r1y-r3y], axis=0)**2
+    r23 = norm([r2x-r3x, r2y-r3y], axis=0)**2
+
+    pe1, pe2, pe3 = - 2/r12 - 2/r13, - 2/r12 - 2/r23, - 2/r13 - 2/r23
+    ke1 = 0.5*norm([v1x, v1y], axis=0)**2
+    ke2 = 0.5*norm([v2x, v2y], axis=0)**2
+    ke3 = 0.5*norm([v3x, v3y], axis=0)**2
+
+    orbit = np.swapaxes(orbit,0,1)
+
+    energy = np.array([pe1, ke1, pe2, ke2, pe3, ke3])
+
+    return orbit, energy

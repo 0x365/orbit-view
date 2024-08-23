@@ -10,9 +10,13 @@ Calculating the period and stability for all the 200x200 orbits in the grid is c
 
 This is just a tool to visualise and shouldn't be used as an official way to calculate orbit stability or orbit periods.
 
-### Period Map and Stability Map
-<img src="https://github.com/0x365/orbit-view/blob/main/data/period_map.png" width="300" height="250"></img>
-<img src="https://github.com/0x365/orbit-view/blob/main/data/stability.png" width="300" height="250"></img>
+### Map of standard distribution of energy of each orbit
+<img src="https://github.com/0x365/orbit-view/blob/main/data/line/energies_std.png" width="300" height="250"></img>
+<img src="https://github.com/0x365/orbit-view/blob/main/data/triangle/energies_std.png" width="300" height="250"></img>
+
+### Map of Correlation between FFT of Neighbouring Orbits
+<img src="https://github.com/0x365/orbit-view/blob/main/data/line/fft_map_close.png" width="300" height="250"></img>
+<img src="https://github.com/0x365/orbit-view/blob/main/data/triangle/fft_map_close.png" width="300" height="250"></img>
 
 ### Setup
 ```bash
@@ -25,5 +29,16 @@ pip install -r requirements.txt
 ```bash
 python main.py
 ```
+Then open `localhost:8000` in the browser of your choice.
 
-Then just click on the plot to view the orbit at that specific stability
+Then just click on the plot to view the orbit at that specific cell. You can switch between energy standard distribution and neighbourhood fft correlation with the buttons at the bottom of the page.
+
+To change between line and triangular initial configuration change orbit type in the main file:
+```python
+########### SETUP ###########
+
+# Max positive and negative velocities on plot
+MAX_V = 1.5
+# Type of starting configuration
+ORBIT_TYPE = "triangle"     # "triangle" or "line"
+```
